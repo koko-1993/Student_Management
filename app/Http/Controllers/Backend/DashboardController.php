@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function dashboard(){
-        return view('backend.dashboard');
+
+        $data['meta_title'] = "Dashboard";
+        return view('backend.dashboard',$data);
     }
 }

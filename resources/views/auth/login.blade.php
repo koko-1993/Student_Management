@@ -23,16 +23,17 @@
                 <h3 class="text-center text-info h1">School</h3>
                 <div class="login-body">
                     <div class="login-title"><strong>Log In</strong> to your account</div>
-                    <form action="index.html" class="form-horizontal" method="post">
-
+                    <form action="" class="form-horizontal" method="post">
+                            {{ csrf_field() }}
+                            @include('_message')
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="text" class="form-control" placeholder="E-mail"/>
+                                <input type="email" name="email" class="form-control" required placeholder="E-mail"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input type="password" class="form-control" placeholder="Password"/>
+                                <input type="password" name="password" class="form-control" required placeholder="Password"/>
                             </div>
                         </div>
                         <div class="form-group">
