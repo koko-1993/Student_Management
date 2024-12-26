@@ -13,7 +13,13 @@
         
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('assets/dist/css/theme-default.css') }}"/>
-        <!-- EOF CSS INCLUDE -->                                       
+        <!-- EOF CSS INCLUDE -->
+         
+        <style type="text/css">
+            .required{
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -33,27 +39,7 @@
             </div>         
             <!-- END PAGE CONTENT -->
         </div>
-        <!-- END PAGE CONTAINER -->    
-
-        <!-- MESSAGE BOX-->
-        <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-times"></span> Remove <strong>Data</strong> ?</div>
-                    <div class="mb-content">
-                        <p>Are you sure you want to remove this row?</p>                    
-                        <p>Press Yes if you sure.</p>
-                    </div>
-                    <div class="mb-footer">
-                        <div class="pull-right">
-                            <button class="btn btn-success btn-lg mb-control-yes">Yes</button>
-                            <button class="btn btn-default btn-lg mb-control-close">No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END MESSAGE BOX-->        
+        <!-- END PAGE CONTAINER -->       
         
         <!-- MESSAGE BOX-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
@@ -81,6 +67,7 @@
         <!-- END PRELOADS -->                      
 
     <!-- START SCRIPTS -->
+
         <!-- START PLUGINS -->
         <script type="text/javascript" src="{{ asset('assets/dist/js/plugins/jquery/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/dist/js/plugins/jquery/jquery-ui.min.js') }}"></script>
@@ -94,13 +81,14 @@
         <!-- END THIS PAGE PLUGINS-->  
         
         <!-- START TEMPLATE -->
-        <script type="text/javascript" src="{{ asset('assets/dist/js/settings.js') }}"></script>
+        <!-- <script type="text/javascript" src="{{ asset('assets/dist/js/settings.js') }}"></script> -->
         
         <script type="text/javascript" src="{{ asset('assets/dist/js/plugins.js') }}"></script>        
         <script type="text/javascript" src="{{ asset('assets/dist/js/actions.js') }}"></script>        
         <!-- END TEMPLATE -->
 
         @yield('script')
+
     <!-- END SCRIPTS -->                 
     </body>
 </html>
