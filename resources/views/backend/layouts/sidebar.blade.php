@@ -29,6 +29,8 @@
             <a href="{{ url('panel/dashboard') }}"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
         </li>
 
+    @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+
         <li class="{{ (Request::segment(2) == 'admin') ? 'active' : '' }}">
             <a href="{{ url('panel/admin') }}"><span class="fa fa-user"></span> <span class="xn-text">Admin</span></a>
         </li>
@@ -36,6 +38,19 @@
         <li class="{{ (Request::segment(2) == 'school') ? 'active' : '' }}">
             <a href="{{ url('panel/school') }}"><span class="fa fa-user"></span> <span class="xn-text">School</span></a>
         </li>
+
+    @endif
+
+    @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2 || Auth::user()->is_admin == 3)
+    
+        <li class="{{ (Request::segment(2) == 'school_admin') ? 'active' : '' }}">
+            <a href="{{ url('panel/school_admin') }}"><span class="fa fa-user"></span> <span class="xn-text">School Admin</span></a>
+        </li>
+    
+        <li class="{{ (Request::segment(2) == 'teacher') ? 'active' : '' }}">
+            <a href="{{ url('panel/teacher') }}"><span class="fa fa-user"></span> <span class="xn-text">Teacher</span></a>
+        </li>
+    @endif
 
         <li class="xn-openable">
             <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Layouts</span></a>

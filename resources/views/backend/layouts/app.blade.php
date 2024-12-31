@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>        
         <!-- META SECTION -->
         <title>{{ !empty($meta_title) ? $meta_title : '' }} - School</title>            
@@ -12,7 +12,7 @@
         <!-- END META SECTION -->
         
         <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('assets/dist/css/theme-default.css') }}"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/theme-default.css') }}"/>
         <!-- EOF CSS INCLUDE -->
          
         <style type="text/css">
@@ -69,22 +69,25 @@
     <!-- START SCRIPTS -->
 
         <!-- START PLUGINS -->
-        <script type="text/javascript" src="{{ asset('assets/dist/js/plugins/jquery/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/dist/js/plugins/jquery/jquery-ui.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/dist/js/plugins/bootstrap/bootstrap.min.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/bootstrap/bootstrap.min.js') }}"></script>        
         <!-- END PLUGINS -->
         
         <!-- START THIS PAGE PLUGINS-->        
-        <script type='text/javascript' src="{{ asset('assets/dist/js/plugins/icheck/icheck.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/dist/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>
+        <script type='text/javascript' src="{{ asset('js/plugins/icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>
         
         <!-- END THIS PAGE PLUGINS-->  
         
         <!-- START TEMPLATE -->
-        <!-- <script type="text/javascript" src="{{ asset('assets/dist/js/settings.js') }}"></script> -->
+        <!-- <script type="text/javascript" src="{{ asset('js/settings.js') }}"></script> -->
         
-        <script type="text/javascript" src="{{ asset('assets/dist/js/plugins.js') }}"></script>        
-        <script type="text/javascript" src="{{ asset('assets/dist/js/actions.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/actions.js') }}"></script> 
+
+        
+               
         <!-- END TEMPLATE -->
 
         @yield('script')

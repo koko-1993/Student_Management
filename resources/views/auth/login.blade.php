@@ -12,13 +12,13 @@
         <!-- END META SECTION -->
         
         <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('assets/dist/css/theme-default.css') }}"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="{{ asset('css/theme-default.css') }}"/>
         <!-- EOF CSS INCLUDE -->                                    
     </head>
     <body>
         
         <div class="login-container">
-        
+    
             <div class="login-box animated fadeInDown">
                 <h3 class="text-center text-info h1">School</h3>
                 <div class="login-body">

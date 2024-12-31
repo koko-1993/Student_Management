@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Hash;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 
 class AuthController extends Controller
@@ -16,9 +17,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function auth_login(Request $request){        
+    public function auth_login(Request $request): RedirectResponse
+    {    
         
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password], true)){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_delete' => 0], true)){
 
             return redirect('panel/dashboard');
 
@@ -33,8 +35,8 @@ class AuthController extends Controller
         return view('auth.forgot');
     }
 
-    public function logout(){
-        
+    public function logout()
+    {    
         Auth::logout();
         return redirect(url(''));
     }

@@ -3,8 +3,8 @@
 @section('content')
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class="active">School</li>
+                    <li class="breadcrumb-item"><a href="{{ url('panel/school') }}">Home</a></li>
+                    <li class="breadcrumb-item active">School</li>
                 </ul>
                 <!-- END BREADCRUMB -->
                 
@@ -36,6 +36,7 @@
                                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                                     <input type="text" name="name" class="form-control" value="{{ old('name') }}" required/>
                                                 </div>
+                                                <div class="required">{{ $errors->first('name') }}</div>
                                             </div>
                                         </div>
 
@@ -53,6 +54,7 @@
                                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                                     <input type="email" name="email" class="form-control" value="{{ old('email') }}" required/>
                                                 </div>
+                                                <div class="required">{{ $errors->first('email') }}</div>
                                             </div>
                                         </div>
                                         

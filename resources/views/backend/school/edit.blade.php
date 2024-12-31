@@ -3,8 +3,8 @@
 @section('content')
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class="active">School</li>
+                    <li class="breadcrumb-item"><a href="{{ url('panel/school') }}">Home</a></li>
+                    <li class="breadcrumb-item active">School</li>
                 </ul>
                 <!-- END BREADCRUMB -->
                 
@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Status <span class="required">*</span></label>
                                             <div class="col-md-6 col-xs-12">                                                                                            
-                                                <select class="form-control select" name="status" required>
+                                                <select class="form-control" name="status" required>
                                                     <option {{ ($getSchool->status == 1) ? 'selected' : '' }} value="1">Active</option>
                                                     <option {{ ($getSchool->status == 0) ? 'selected' : '' }} value="0">Inactive</option>
                                                 </select>
@@ -92,7 +92,7 @@
 
                                     </div>
                                     <div class="panel-footer">
-                                        <button class="btn btn-default">Clear Form</button>                                    
+                                    <a href="{{ url('panel.school') }}"><button class="btn btn-default">Back</button></a>                                   
                                         <button class="btn btn-primary pull-right">Submit</button>
                                     </div>
                                 </div>

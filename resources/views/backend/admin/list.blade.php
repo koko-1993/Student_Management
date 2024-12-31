@@ -51,7 +51,7 @@
 
                             <div class="col-md-2">
                                 <label for="is_admin">Role</label>
-                                <select class="form-control select" name="is_admin">
+                                <select class="form-control" name="is_admin">
                                     <option value="">Select</option>
                                     <option {{ (Request::get('is_admin') == '1') ? 'selected' : '' }} value="1">Super Admin</option>
                                     <option {{ (Request::get('is_admin') == '2') ? 'selected' : '' }} value="2">Admin</option>
@@ -60,7 +60,7 @@
 
                             <div class="col-md-2">
                                 <label for="status">Status</label>
-                                <select class="form-control select" name="status">
+                                <select class="form-control" name="status">
                                     <option value="">Select</option>
                                     <option {{ (Request::get('status') == '1') ? 'selected' : '' }} value="1">Active</option>
                                     <option {{ (Request::get('status') == '100') ? 'selected' : '' }} value="100">Inactive</option>

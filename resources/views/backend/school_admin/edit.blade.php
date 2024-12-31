@@ -4,13 +4,13 @@
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Admin</li>
+                    <li class="active">School Admin</li>
                 </ul>
                 <!-- END BREADCRUMB -->
                 
                 <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Edit Admin</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Edit School Admin</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
 
@@ -24,7 +24,7 @@
                                     {{ csrf_field() }}
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Edit Admin</h3>
+                                        <h3 class="panel-title">Edit School Admin</h3>
                                     </div>
 
                                     <div class="panel-body">                                                                        
@@ -90,19 +90,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="col-md-3 col-xs-12 control-label">Role <span class="required">*</span></label>
-                                            <div class="col-md-6 col-xs-12">                                                                                            
-                                                <select class="form-control" name="is_admin" required>
-                                                    <option {{ ($getRecord->is_admin == 1) ? 'selected' : '' }} value="1">Super Admin</option>
-                                                    <option {{ ($getRecord->is_admin == 2) ? 'selected' : '' }} value="2">Admin</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
                                     </div>
                                     <div class="panel-footer">
-                                        <a href="{{ url('panel.admin') }}"><button class="btn btn-default">Back</button></a>                                  
+                                        <a href="{{ url('panel.school_admin') }}"><button class="btn btn-default">Back</button></a>                                  
                                         <button type="submit" class="btn btn-primary pull-right">Submit</button>
                                     </div>
                                 </div>

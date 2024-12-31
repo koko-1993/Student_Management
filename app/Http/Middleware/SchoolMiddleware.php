@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthCommonMiddleware
+class SchoolMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,13 +18,21 @@ class AuthCommonMiddleware
     {
         if(!empty(Auth::check()))
         {
-            return $next($request);
-
-        }else{
-
+            if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2 || Auth::user()->is_admin == 3)
+            {
+                return $next($request);
+            }
+            else
+            {
+                Auth::logout();
+                return redirect(url(''));
+            }
+            
+        }
+        else
+        {
             Auth::logout();
             return redirect(url(''));
-
         }
     }
 }

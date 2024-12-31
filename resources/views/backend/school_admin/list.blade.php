@@ -3,14 +3,14 @@
 @section('content')
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                    <li class="breadcrumb-item active">School</li>
-                </ul>
+        <li><a href="#">Home</a></li>
+        <li class="active">School Admin</li>
+    </ul>
     <!-- END BREADCRUMB -->
                 
     <!-- PAGE TITLE -->
     <div class="page-title">                    
-        <h2><span class="fa fa-arrow-circle-o-left"></span> School</h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span> School Admin</h2>
     </div>
     <!-- END PAGE TITLE -->                
                 
@@ -24,7 +24,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">School Search</h3>
+                        <h3 class="panel-title">School Admin Search</h3>
                     </div>
                     <div class="panel-body">
 
@@ -35,8 +35,8 @@
                             </div>
 
                             <div class="col-md-2">
-                                <label for="name">School Name</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ Request::get('name') }}" placeholder="School Name"/>
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" class="form-control" value="{{ Request::get('name') }}" placeholder="Name"/>
                             </div>
 
                             <div class="col-md-2">
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="col-md-2">
-                                <label for="address">Status</label>
+                                <label for="status">Status</label>
                                 <select class="form-control" name="status">
                                     <option value="">Select</option>
                                     <option {{ (Request::get('status') == '1') ? 'selected' : '' }} value="1">Active</option>
@@ -62,7 +62,7 @@
                             <br/>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Search</button>
-                                <a href="{{ url('panel/school') }}" class="btn btn-success">Reset</a>
+                                <a href="{{ url('panel/school_admin') }}" class="btn btn-success">Reset</a>
                             </div>
                         </form>
 
@@ -72,8 +72,8 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">School List</h3>
-                        <a href="{{ url('panel/school/create') }}" class="btn btn-primary pull-right">Create School</a>
+                        <h3 class="panel-title">School Admin List</h3>
+                        <a href="{{ url('panel/school_admin/create') }}" class="btn btn-primary pull-right">Create School Admin</a>
                     </div>
 
                     <div class="panel-body panel-body-table">
@@ -83,8 +83,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+                                            <th>School Name</th>
+                                        @endif
                                         <th>Profile</th>
-                                        <th>School Name</th>
+                                        <th>Name</th>
                                         <th>Email</th>
                                         <th>Address</th>
                                         <th>status</th>
@@ -93,9 +96,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($getSchool as $value)                                         
+                                    @forelse($getRecord as $value)                                         
                                     <tr>
                                         <td>{{ $value->id }}</td>
+                                        @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 2)
+                                            <td>
+                                                @if(!empty($value->getCreatedBy))
+                                                    {{ $value->getCreatedBy->name }}
+                                                @endif
+                                            </td>
+                                        @endif
                                         <td>
                                             @if(!empty($value->getProfile()))
                                                 <img style="width: 50px;height: 50px;border-radius: 50%;" src="{{ $value->getProfile() }}" alt="{{ $value->id }}" />
@@ -104,6 +114,7 @@
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->email }}</td>
                                         <td>{{ $value->address }}</td>
+                                        
                                         <td>
                                             @if($value->status == 1)
                                                 <span class="label label-success">Active</span>
@@ -115,8 +126,8 @@
                                             {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                         </td>
                                         <td>
-                                            <a href="{{ url('panel/school/edit/'.$value->id) }}" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></a>
-                                            <a href="{{ url('panel/school/delete/'.$value->id) }}" onclick="return confirm('Are you sure do you want to delete?');" class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></a>
+                                            <a href="{{ url('panel/school_admin/edit/'.$value->id) }}" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></a>
+                                            <a href="{{ url('panel/school_admin/delete/'.$value->id) }}" onclick="return confirm('Are you sure do you want to delete?');" class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></a>
                                         </td>
                                     </tr>
                                     @empty
@@ -134,7 +145,7 @@
                 </div>   
                             
                 <div class="pull-right">
-                    {{ $getSchool->links() }}
+                    {{ $getRecord->links() }}
                 </div> 
 
             </div>
@@ -148,3 +159,4 @@
 @section('script')
         
 @endsection
+
