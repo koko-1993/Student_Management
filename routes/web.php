@@ -63,6 +63,7 @@ Route::group(['middleware' => 'school'], function(){
     Route::get('panel/student/edit/{id}', [StudentController::class,'edit_student']);
     Route::post('panel/student/edit/{id}', [StudentController::class,'update_student']);
     Route::get('panel/student/delete/{id}', [StudentController::class,'delete_student']);
+    Route::post('panel/student/getclass', [StudentController::class,'getclass']);
 
 
     Route::get('panel/school_admin', [SchoolAdminController::class,'school_admin_list']);

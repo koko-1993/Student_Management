@@ -3,7 +3,7 @@
 @section('content')
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('panel/teacher') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('panel/student') }}">Home</a></li>
                     <li class="breadcrumb-item active">Student</li>
                 </ul>
                 <!-- END BREADCRUMB -->
@@ -33,9 +33,9 @@
                                             <div class="form-group">
                                                 <label for="" class="col-md-3 col-xs-12 control-label">School Name <span class="required">*</span></label>
                                                 <div class="col-md-6 col-xs-12">
-                                                    <select class="form-control" required name="school_id">
+                                                    <select class="form-control SchoolChange" required name="school_id">
                                                         <option value="">Select</option>
-                                                        @foreach(@getSchool as $school)
+                                                        @foreach($getSchool as $school)
                                                             <option value="{{ $school->id }}">{{ $school->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -90,7 +90,7 @@
                                         <div class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Class <span class="required">*</span></label>
                                             <div class="col-md-6 col-xs-12">                                                                                            
-                                                <select class="form-control select" name="class_id" required>
+                                                <select class="form-control getClass" name="class_id" required>
                                                     <option value="">Select</option>
                                                     @foreach($getClass as $class)
                                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -270,5 +270,23 @@
 @endsection
 
 @section('script')
-        
+
+    <script type="text/javascript">
+        $('body').delegate('.SchoolChange','change',function(){
+            var school_id = $(this).val();
+            $.ajax({
+                url:"{{ url('panel/student/getclass') }}",
+                type:"POST",
+                data:{
+                    _token:"{{ csrf_token() }}",
+                    school_id:school_id,
+                },
+                dataType:"json",
+                success:function(response){
+                    $('.getClass').html(response.success);
+                },
+            });
+        });
+    </script>
+
 @endsection
