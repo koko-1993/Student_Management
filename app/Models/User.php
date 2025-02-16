@@ -143,11 +143,12 @@ class User extends Authenticatable
         return $return;
     }
 
-    static public function getSchoolAll($value='')
+    static public function getSchoolAll()
     {
         return self::select('*')
                 ->where('is_admin','=', 3)
                 ->where('is_delete', '=', 0)
+                ->where('status', '=', 1)
                 ->orderBy('id', 'asc')
                 ->get();
     }
@@ -206,6 +207,60 @@ class User extends Authenticatable
         return $return;
     }
 
+    static public function getStudent($user_id, $user_type)
+    {
+        $return = self::select('*');
+
+            if(!empty(Request::get('id')))
+            {
+                $return = $return->where('id','=', Request::get('id'));
+            }
+
+            if(!empty(Request::get('name')))
+            {
+                $return = $return->where('name','like','%'.Request::get('name').'%' );
+            }
+
+            if(!empty(Request::get('lastname')))
+            {
+                $return = $return->where('lastname','like','%'.Request::get('lastname').'%' );
+            }
+
+            if(!empty(Request::get('email')))
+            {
+                $return = $return->where('email','like','%'.Request::get('email').'%' );
+            }
+
+            if(!empty(Request::get('gender')))
+            {
+                $return = $return->where('gender','=', Request::get('gender'));
+            }
+
+            if(!empty(Request::get('status')))
+            {
+                $status = Request::get('status');
+                if($status == 100)
+                {
+                    $status = 0;
+                }
+
+                $return = $return->where('status','=', $status);
+            }
+
+            if($user_type == 3)
+            {
+                $return = $return->where('created_by_id', '=', $user_id);
+            }
+
+        $return = $return->where('is_admin','=', 6)
+                ->where('is_delete','=', 0)
+                ->orderBy('id','desc')
+                ->paginate(20);
+        return $return;
+    }
+
+    
+
     static public function getSchoolAdmin($user_id, $user_type)
     {
         $return = self::select('*');
@@ -259,6 +314,12 @@ class User extends Authenticatable
     public function getCreatedBy()
     {
         return $this->belongsTo(User::class, 'created_by_id');
+    }
+
+
+    public function getClass()
+    {
+        return $this->belongsTo(ClassModel::class, 'class_id');
     }
 
 

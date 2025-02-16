@@ -50,6 +50,21 @@
         <li class="{{ (Request::segment(2) == 'teacher') ? 'active' : '' }}">
             <a href="{{ url('panel/teacher') }}"><span class="fa fa-user"></span> <span class="xn-text">Teacher</span></a>
         </li>
+
+        <li class="{{ (Request::segment(2) == 'student') ? 'active' : '' }}">
+            <a href="{{ url('panel/student') }}"><span class="fa fa-user"></span> <span class="xn-text">Student</span></a>
+        </li>
+
+    @endif
+
+    @if(Auth::user()->is_admin == 3)
+        <li class="xn-openable {{ (Request::segment(2) == 'class' || Request::segment(2) == 'subject') ? 'active' : '' }}">
+            <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Academics</span></a>
+            <ul>
+                <li class="{{ (Request::segment(2) == 'class') ? 'active' : '' }}"><a href="{{ url('panel/class') }}"><span class="fa fa-random"></span> Class</a></li>
+                <li class="{{ (Request::segment(2) == 'subject') ? 'active' : '' }}"><a href="{{ url('panel/subject') }}"><span class="fa fa-random"></span> Subject</a></li>
+            </ul>
+        </li>  
     @endif
 
         <li class="xn-openable">
