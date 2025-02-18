@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\ClassController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ParentController;
 use App\Http\Controllers\Backend\SchoolController;
 use App\Http\Controllers\Backend\SchoolAdminController;
 use App\Http\Controllers\Backend\StudentController;
@@ -21,7 +22,7 @@ Route::get('logout',[AuthController::class,'logout']);
 
 Route::group(['middleware' => 'common'], function(){
 
-    Route::get('panel/dashboard', [DashboardController::class,'dashboard']);
+    
 
 });
 
@@ -49,6 +50,9 @@ Route::group(['middleware' => 'admin'], function(){
 
 Route::group(['middleware' => 'school'], function(){
 
+    Route::get('panel/dashboard', [DashboardController::class,'dashboard']);
+
+    // Teacher 
     Route::get('panel/teacher', [TeacherController::class,'teacher_list']);
     Route::get('panel/teacher/create', [TeacherController::class,'create_teacher']);
     Route::post('panel/teacher/create', [TeacherController::class,'insert_teacher']);
@@ -56,7 +60,7 @@ Route::group(['middleware' => 'school'], function(){
     Route::post('panel/teacher/edit/{id}', [TeacherController::class,'update_teacher']);
     Route::get('panel/teacher/delete/{id}', [TeacherController::class,'delete_teacher']);
 
-
+    // Student 
     Route::get('panel/student', [StudentController::class,'student_list']);
     Route::get('panel/student/create', [StudentController::class,'create_student']);
     Route::post('panel/student/create', [StudentController::class,'insert_student']);
@@ -64,6 +68,17 @@ Route::group(['middleware' => 'school'], function(){
     Route::post('panel/student/edit/{id}', [StudentController::class,'update_student']);
     Route::get('panel/student/delete/{id}', [StudentController::class,'delete_student']);
     Route::post('panel/student/getclass', [StudentController::class,'getclass']);
+
+    // Parent 
+    Route::get('panel/parent', [ParentController::class,'parent_list']);
+    Route::get('panel/parent/create', [ParentController::class,'create_parent']);
+    Route::post('panel/parent/create', [ParentController::class,'insert_parent']);
+    Route::get('panel/parent/edit/{id}', [ParentController::class,'edit_parent']);
+    Route::post('panel/parent/edit/{id}', [ParentController::class,'update_parent']);
+    Route::get('panel/parent/delete/{id}', [ParentController::class,'delete_parent']);
+    Route::get('panel/parent/my-student/{id}', [ParentController::class,'my_student']);
+    Route::get('panel/parent/add-student/{student_id}/{parent_id}', [ParentController::class,'add_student']);
+    Route::get('panel/parent/my-student-delete/{student_id}', [ParentController::class,'my_student_delete']);
 
 
     Route::get('panel/school_admin', [SchoolAdminController::class,'school_admin_list']);
@@ -87,5 +102,26 @@ Route::group(['middleware' => 'school'], function(){
     Route::post('panel/subject/edit/{id}', [SubjectController::class,'update_subject']);
     Route::get('panel/subject/delete/{id}', [SubjectController::class,'delete_subject']);
 
+
+});
+
+
+Route::group(['middleware' => 'teacher'], function(){
+
+    Route::get('teacher/dashboard', [DashboardController::class,'dashboard']);
+
+});
+
+
+Route::group(['middleware' => 'student'], function(){
+
+    Route::get('student/dashboard', [DashboardController::class,'dashboard']);
+
+});
+
+
+Route::group(['middleware' => 'parent'], function(){
+
+    Route::get('parent/dashboard', [DashboardController::class,'dashboard']);
 
 });

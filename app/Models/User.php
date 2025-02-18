@@ -259,6 +259,70 @@ class User extends Authenticatable
         return $return;
     }
 
+
+    static public function getParent($user_id, $user_type)
+    {
+        $return = self::select('*');
+
+            if(!empty(Request::get('id')))
+            {
+                $return = $return->where('id','=', Request::get('id'));
+            }
+
+            if(!empty(Request::get('name')))
+            {
+                $return = $return->where('name','like','%'.Request::get('name').'%' );
+            }
+
+            if(!empty(Request::get('lastname')))
+            {
+                $return = $return->where('lastname','like','%'.Request::get('lastname').'%' );
+            }
+
+            if(!empty(Request::get('email')))
+            {
+                $return = $return->where('email','like','%'.Request::get('email').'%' );
+            }
+
+            if(!empty(Request::get('gender')))
+            {
+                $return = $return->where('gender','=', Request::get('gender'));
+            }
+
+            if(!empty(Request::get('status')))
+            {
+                $status = Request::get('status');
+                if($status == 100)
+                {
+                    $status = 0;
+                }
+
+                $return = $return->where('status','=', $status);
+            }
+
+            if($user_type == 3)
+            {
+                $return = $return->where('created_by_id', '=', $user_id);
+            }
+
+        $return = $return->where('is_admin','=', 7)
+                ->where('is_delete','=', 0)
+                ->orderBy('id','desc')
+                ->paginate(20);
+        return $return;
+    }
+
+
+    static public function getParentMyStudent($parent_id)
+    {
+        $return = self::select('*');
+        $return = $return->where('parent_id', '=', $parent_id);
+        $return = $return->where('is_admin','=', 6)
+                ->where('is_delete','=', 0)
+                ->orderBy('id','desc')
+                ->get();
+        return $return;
+    }
     
 
     static public function getSchoolAdmin($user_id, $user_type)
@@ -317,6 +381,12 @@ class User extends Authenticatable
     }
 
 
+    public function getParentData()
+    {
+        return $this->belongsTo(User::class, 'parent_id');
+    }
+
+
     public function getClass()
     {
         return $this->belongsTo(ClassModel::class, 'class_id');
@@ -332,6 +402,19 @@ class User extends Authenticatable
         else
         {
             return "";
+        }
+    }
+
+
+    public function getProfileLive()
+    {
+        if(!empty($this->profile_pic) && file_exists('upload/profile/'.$this->profile_pic))
+        {
+            return url('upload/profile/'.$this->profile_pic);
+        }
+        else
+        {
+            return url('upload/profile/user.jpg');
         }
     }
 }
