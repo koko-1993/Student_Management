@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\SchoolAdminController;
 use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\SubjectController;
 use App\Http\Controllers\Backend\TeacherController;
+use App\Http\Controllers\Backend\UserController;
 
 
 Route::get('/',[AuthController::class,'login']);
@@ -22,7 +23,11 @@ Route::get('logout',[AuthController::class,'logout']);
 
 Route::group(['middleware' => 'common'], function(){
 
-    
+    Route::get('panel/change-password', [UserController::class,'change_password']);
+    Route::post('panel/change-password', [UserController::class,'update_password']);
+
+    Route::get('panel/my-account', [UserController::class,'my_account']);
+    Route::post('panel/my-account', [UserController::class,'update_account']);
 
 });
 
