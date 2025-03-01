@@ -207,6 +207,19 @@ class User extends Authenticatable
         return $return;
     }
 
+
+    static public function getTeacherActive($user_id)
+    {
+        $return = self::select('*');
+        $return = $return->where('created_by_id', '=', $user_id);
+        $return = $return->where('is_admin','=', 5)
+                ->where('is_delete','=', 0)
+                ->where('status','=', 1)
+                ->orderBy('id','asc')
+                ->get();
+        return $return;
+    }
+
     static public function getStudent($user_id, $user_type)
     {
         $return = self::select('*');

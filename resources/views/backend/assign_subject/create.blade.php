@@ -4,13 +4,13 @@
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Subject</li>
+                    <li class="active">Assign Subject Class</li>
                 </ul>
                 <!-- END BREADCRUMB -->
                 
                 <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Create Subject</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Create Assign Subject Class</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
                 
@@ -24,30 +24,31 @@
                                     {{ csrf_field() }}
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Create Subject</h3>
+                                        <h3 class="panel-title">Create Assign Subject Class</h3>
                                     </div>
 
                                     <div class="panel-body">                                                                        
                                         
                                         <div class="form-group">
-                                            <label class="col-md-3 col-xs-12 control-label">Subject Name <span class="required">*</span></label>
-                                            <div class="col-md-6 col-xs-12">                                            
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required/>
-                                                </div>
-                                                <div class="required">{{ $errors->first('name') }}</div>
+                                            <label class="col-md-3 col-xs-12 control-label">Class <span class="required">*</span></label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <select class="form-control" name="class_id" required>
+                                                    <option value="">Select Class</option>
+                                                    @foreach($getClass as $class)
+                                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 col-xs-12 control-label">Type <span class="required">*</span></label>
-                                            <div class="col-md-6 col-xs-12">                                                                                            
-                                                <select class="form-control" name="type" required>
-                                                    <option value="">Select</option>
-                                                    <option value="Theory">Theory</option>
-                                                    <option value="Practical">Practical</option>
-                                                </select>
+                                            <label class="col-md-3 col-xs-12 control-label">Subject <span class="required">*</span></label>
+                                            <div class="col-md-6 col-xs-12">
+                                                    @foreach($getSubject as $subject)
+                                                        <label style="display: block;margin-bottom: 7px;">
+                                                            <input type="checkbox" name="subject_id[]" value="{{ $subject->id }}" /> {{ $subject->name }}
+                                                        </label>
+                                                    @endforeach
                                             </div>
                                         </div>
 
@@ -61,6 +62,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div class="panel-footer">                              
                                         <button class="btn btn-primary pull-right">Submit</button>
                                     </div>

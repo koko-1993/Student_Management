@@ -108,6 +108,26 @@ Route::group(['middleware' => 'school'], function(){
     Route::get('panel/subject/delete/{id}', [SubjectController::class,'delete_subject']);
 
 
+    Route::get('panel/assign-subject', [SubjectController::class,'assign_subject_list']);
+    Route::get('panel/assign-subject/create', [SubjectController::class,'create_assign_subject']);
+    Route::post('panel/assign-subject/create', [SubjectController::class,'insert_assign_subject']);
+    Route::get('panel/assign-subject/edit/{id}', [SubjectController::class,'edit_assign_subject']);
+    Route::post('panel/assign-subject/edit/{id}', [SubjectController::class,'update_assign_subject']);
+    Route::get('panel/assign-subject/delete/{id}', [SubjectController::class,'delete_assign_subject']);
+
+
+    Route::get('panel/class-timetable', [SubjectController::class,'class_timetable']);
+    Route::post('panel/class-timetable', [SubjectController::class,'submit_class_timetable']);
+    Route::post('panel/get_assign_subject_class', [SubjectController::class,'get_assign_subject_class']);
+
+
+    Route::get('panel/assign-class-teacher', [ClassController::class,'assign_class_teacher_list']);
+    Route::get('panel/assign-class-teacher/create', [ClassController::class,'create_assign_class_teacher']);
+    Route::post('panel/assign-class-teacher/create', [ClassController::class,'insert_assign_class_teacher']);
+    Route::get('panel/assign-class-teacher/edit/{id}', [ClassController::class,'edit_assign_class_teacher']);
+    Route::post('panel/assign-class-teacher/edit/{id}', [ClassController::class,'update_assign_class_teacher']);
+    Route::get('panel/assign-class-teacher/delete/{id}', [ClassController::class,'delete_assign_class_teacher']);
+
 });
 
 
