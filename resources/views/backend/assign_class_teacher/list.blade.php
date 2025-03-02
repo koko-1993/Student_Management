@@ -103,6 +103,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ url('panel/assign-class-teacher/edit/'.$value->id) }}" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></a>
+                                            <a href="{{ url('panel/assign-class-teacher/edit-single/'.$value->id) }}" class="btn btn-primary btn-sm">Edit Single</a>
                                             <a href="{{ url('panel/assign-class-teacher/delete/'.$value->id) }}" onclick="return confirm('Are you sure do you want to delete?');" class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></a>
                                         </td>
                                     </tr>

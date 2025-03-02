@@ -43,21 +43,15 @@
 
                                         <div class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Teacher <span class="required">*</span></label>
-                                            <div class="col-md-6 col-xs-12">                                                
-                                                @foreach($getTeacher as $teacher)
-                                                    @php 
-                                                        $checked = "";
-                                                    @endphp
-                                                    @foreach($getSelectedTeacher as $selectTeacher)
-                                                        @if($selectTeacher->teacher_id == $teacher->id)
-                                                            @php 
-                                                                $checked = "checked";
-                                                            @endphp
-                                                        @endif
+                                            <div class="col-md-6 col-xs-12">
+                                                
+                                                <select class="form-control" name="teacher_id" required>
+                                                    <option value="">Select Teacher</option>
+                                                    @foreach($getTeacher as $teacher)
+                                                        <option {{ ($getRecord->teacher_id == $teacher->id) ? 'selected' : '' }} value="{{ $teacher->id }}">{{ $teacher->name }} {{ $teacher->lastname }}</option>
                                                     @endforeach
-                                                    <label style="display: block;margin-bottom: 7px;">
-                                                        <input {{ $checked }} type="checkbox" name="teacher_id[]" value="{{ $teacher->id }}" /> {{ $teacher->name }} {{ $teacher->lastname }}</label>
-                                                @endforeach
+                                                </select>
+                                                
                                             </div>
                                         </div>
 

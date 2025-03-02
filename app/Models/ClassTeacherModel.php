@@ -23,9 +23,18 @@ class ClassTeacherModel extends Model
                         ->count();
     }
 
+    static public function checkClassTeacherSingle($created_by_id, $class_id, $teacher_id)
+    {
+        return ClassTeacherModel::where('created_by_id','=',$created_by_id)
+                        ->where('class_id', '=', $class_id)
+                        ->where('teacher_id', '=',$teacher_id)
+                        ->where('is_delete', '=', 0)
+                        ->first();
+    }
+
     static public function getSelectedTeacher($class_id, $created_by_id)
     {
-        return ClassTeacherModel::select('class_teacher.*','users.name as teacher_name')
+        return ClassTeacherModel::select('class_teacher.*','users.name as teacher_name','users.lastname as teacher_lastname')
                         ->join('users', 'users.id', '=', 'class_teacher.teacher_id')
                         ->where('class_teacher.created_by_id','=',$created_by_id)
                         ->where('class_teacher.class_id', '=', $class_id)

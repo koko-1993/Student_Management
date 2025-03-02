@@ -3,14 +3,14 @@
 @section('content')
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li class="active">Assign Subject Class</li>
-    </ul>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                    <li class="breadcrumb-item active">My Class & Subject</li>
+                </ul>
     <!-- END BREADCRUMB -->
                 
     <!-- PAGE TITLE -->
     <div class="page-title">                    
-        <h2><span class="fa fa-arrow-circle-o-left"></span> Assign Subject Class</h2>
+        <h2><span class="fa fa-arrow-circle-o-left"></span> My Class & Subject</h2>
     </div>
     <!-- END PAGE TITLE -->                
                 
@@ -24,7 +24,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Assign Subject Class Search</h3>
+                        <h3 class="panel-title">My Class & Subject Search</h3>
                     </div>
                     <div class="panel-body">
 
@@ -35,17 +35,22 @@
                             </div>
 
                             <div class="col-md-2">
-                                <label for="name">Class Name</label>
-                                <input type="text" name="class_name" class="form-control" value="{{ Request::get('class_name') }}" placeholder="Class Name"/>
+                                <label for="name">My Class & Subject Name</label>
+                                <input type="text" name="name" id="name" class="form-control" value="{{ Request::get('name') }}" placeholder="My Class & Subject Name"/>
                             </div>
 
                             <div class="col-md-2">
-                                <label for="name">Subject Name</label>
-                                <input type="text" name="subject_name" class="form-control" value="{{ Request::get('subject_name') }}" placeholder="Subject Name"/>
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" value="{{ Request::get('email') }}" placeholder="Email"/>
                             </div>
 
                             <div class="col-md-2">
-                                <label for="status">Status</label>
+                                <label for="address">Address</label>
+                                <input type="text" name="address" id="address" class="form-control" value="{{ Request::get('address') }}" placeholder="Address"/>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="address">Status</label>
                                 <select class="form-control" name="status">
                                     <option value="">Select</option>
                                     <option {{ (Request::get('status') == '1') ? 'selected' : '' }} value="1">Active</option>
@@ -57,7 +62,7 @@
                             <br/>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Search</button>
-                                <a href="{{ url('panel/assign-subject') }}" class="btn btn-success">Reset</a>
+                                <a href="{{ url('panel/school') }}" class="btn btn-success">Reset</a>
                             </div>
                         </form>
 
@@ -67,8 +72,7 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">Assign Subject Class List</h3>
-                        <a href="{{ url('panel/assign-subject/create') }}" class="btn btn-primary pull-right">Create Assign Subject</a>
+                        <h3 class="panel-title">My Class & Subject List</h3>
                     </div>
 
                     <div class="panel-body panel-body-table">
@@ -80,39 +84,14 @@
                                         <th>#</th>
                                         <th>Class Name</th>
                                         <th>Subject Name</th>
-                                        <th>status</th>
+                                        <th>Subject Type</th>
+                                        <th>My Class Timetable</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($getRecord as $value)                                         
-                                    <tr>
-                                        <td>{{ $value->id }}</td>
-                                        <td>{{ $value->class_name }}</td>
-                                        <td>{{ $value->subject_name }}</td>
-                                        <td>
-                                            @if($value->status == 1)
-                                                <span class="label label-success">Active</span>
-                                            @else
-                                                <span class="label label-danger">Inactive</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ url('panel/assign-subject/edit/'.$value->id) }}" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></a>
-                                            <a href="{{ url('panel/assign-subject/edit-single/'.$value->id) }}" class="btn btn-primary btn-sm">Edit Single</a>
-                                            <a href="{{ url('panel/assign-subject/delete/'.$value->id) }}" onclick="return confirm('Are you sure do you want to delete?');" class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></a>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="100%">Record not found.</td>
-                                    </tr>
                                     
-                                    @endforelse
                                 </tbody>
                             </table>
 
@@ -122,7 +101,7 @@
                 </div>   
                             
                 <div class="pull-right">
-                    {{ $getRecord->links() }}
+                    {{-- {{ $getSchool->links() }} --}}
                 </div> 
 
             </div>
@@ -136,4 +115,3 @@
 @section('script')
         
 @endsection
-

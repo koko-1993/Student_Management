@@ -115,6 +115,9 @@ Route::group(['middleware' => 'school'], function(){
     Route::post('panel/assign-subject/edit/{id}', [SubjectController::class,'update_assign_subject']);
     Route::get('panel/assign-subject/delete/{id}', [SubjectController::class,'delete_assign_subject']);
 
+    Route::get('panel/assign-subject/edit-single/{id}', [SubjectController::class,'edit_single_assign_subject']);
+    Route::post('panel/assign-subject/edit-single/{id}', [SubjectController::class,'update_single_assign_subject']);
+
 
     Route::get('panel/class-timetable', [SubjectController::class,'class_timetable']);
     Route::post('panel/class-timetable', [SubjectController::class,'submit_class_timetable']);
@@ -128,12 +131,17 @@ Route::group(['middleware' => 'school'], function(){
     Route::post('panel/assign-class-teacher/edit/{id}', [ClassController::class,'update_assign_class_teacher']);
     Route::get('panel/assign-class-teacher/delete/{id}', [ClassController::class,'delete_assign_class_teacher']);
 
+    Route::get('panel/assign-class-teacher/edit-single/{id}', [ClassController::class,'edit_single_assign_class_teacher']);
+    Route::post('panel/assign-class-teacher/edit-single/{id}', [ClassController::class,'update_single_assign_class_teacher']);
+
+
 });
 
 
 Route::group(['middleware' => 'teacher'], function(){
 
     Route::get('teacher/dashboard', [DashboardController::class,'dashboard']);
+    Route::get('teacher/my-class-subject', [ClassController::class,'TeacherClassSubject']);
 
 });
 

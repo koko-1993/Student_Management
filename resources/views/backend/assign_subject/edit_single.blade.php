@@ -4,13 +4,13 @@
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Assign Class Teacher</li>
+                    <li class="active">Assign Subject Class</li>
                 </ul>
                 <!-- END BREADCRUMB -->
                 
                 <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Edit Assign Class Teacher</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Edit Assign Subject Class</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
                 
@@ -24,7 +24,7 @@
                                     {{ csrf_field() }}
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Edit Assign Class Teacher</h3>
+                                        <h3 class="panel-title">Edit Assign Subject Class</h3>
                                     </div>
 
                                     <div class="panel-body">                                                                        
@@ -42,22 +42,16 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 col-xs-12 control-label">Teacher <span class="required">*</span></label>
-                                            <div class="col-md-6 col-xs-12">                                                
-                                                @foreach($getTeacher as $teacher)
-                                                    @php 
-                                                        $checked = "";
-                                                    @endphp
-                                                    @foreach($getSelectedTeacher as $selectTeacher)
-                                                        @if($selectTeacher->teacher_id == $teacher->id)
-                                                            @php 
-                                                                $checked = "checked";
-                                                            @endphp
-                                                        @endif
+                                            <label class="col-md-3 col-xs-12 control-label">Subject <span class="required">*</span></label>
+                                            <div class="col-md-6 col-xs-12">
+
+                                                <select class="form-control" name="subject_id" required>
+                                                    <option value="">Select Subject</option>
+                                                    @foreach($getSubject as $subject)
+                                                        <option {{ ($getRecord->subject_id == $subject->id) ? 'selected' : '' }} value="{{ $subject->id }}">{{ $subject->name }}</option>
                                                     @endforeach
-                                                    <label style="display: block;margin-bottom: 7px;">
-                                                        <input {{ $checked }} type="checkbox" name="teacher_id[]" value="{{ $teacher->id }}" /> {{ $teacher->name }} {{ $teacher->lastname }}</label>
-                                                @endforeach
+                                                </select>
+
                                             </div>
                                         </div>
 
@@ -65,8 +59,8 @@
                                             <label class="col-md-3 col-xs-12 control-label">Status <span class="required">*</span></label>
                                             <div class="col-md-6 col-xs-12">                                                                                            
                                                 <select class="form-control" name="status" required>
-                                                <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Active</option>
-                                                <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Inactive</option>
+                                                    <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Active</option>
+                                                    <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Inactive</option>
                                                 </select>
                                             </div>
                                         </div>
