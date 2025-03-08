@@ -142,6 +142,7 @@ Route::group(['middleware' => 'teacher'], function(){
 
     Route::get('teacher/dashboard', [DashboardController::class,'dashboard']);
     Route::get('teacher/my-class-subject', [ClassController::class,'TeacherClassSubject']);
+    Route::get('teacher/my-class-subject/timetable/{class_id}/{subject_id}', [ClassController::class,'TeacherTimeTable']);
 
 });
 

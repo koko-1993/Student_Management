@@ -8,9 +8,9 @@ use Str;
 use App\Http\Controllers\Controller;
 use App\Models\ClassModel;
 use App\Models\ClassTimeTableModel;
+use App\Models\WeekModel;
 use App\Models\SubjectModel;
 use App\Models\SubjectClassModel;
-use App\Models\WeekModel;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller

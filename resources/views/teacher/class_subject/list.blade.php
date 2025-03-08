@@ -29,33 +29,15 @@
                     <div class="panel-body">
 
                         <form action="" method="GET">
+
                             <div class="col-md-2">
-                                <label for="id">ID</label>
-                                <input type="text" name="id" id="" class="form-control" value="{{ Request::get('id') }}" placeholder="ID"/>
+                                <label for="name">Class Name</label>
+                                <input type="text" name="class_name" class="form-control" value="{{ Request::get('class_name') }}" placeholder="Class Name"/>
                             </div>
 
                             <div class="col-md-2">
-                                <label for="name">My Class & Subject Name</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ Request::get('name') }}" placeholder="My Class & Subject Name"/>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{ Request::get('email') }}" placeholder="Email"/>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label for="address">Address</label>
-                                <input type="text" name="address" id="address" class="form-control" value="{{ Request::get('address') }}" placeholder="Address"/>
-                            </div>
-
-                            <div class="col-md-2">
-                                <label for="address">Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="">Select</option>
-                                    <option {{ (Request::get('status') == '1') ? 'selected' : '' }} value="1">Active</option>
-                                    <option {{ (Request::get('status') == '100') ? 'selected' : '' }} value="100">Inactive</option>
-                                </select>
+                                <label for="name">Subject Name</label>
+                                <input type="text" name="subject_name" class="form-control" value="{{ Request::get('subject_name') }}" placeholder="Subject Name"/>
                             </div>
 
                             <div style="clear: both;"></div>
@@ -91,7 +73,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    @forelse($getRecord as $value)
+                                        <tr>
+                                            <td>{{ $value->id }}</td>
+                                            <td>{{ $value->class_name }}</td>
+                                            <td>{{ $value->subject_name }}</td>
+                                            <td>{{ $value->subject_type }}</td>
+                                            <td>
+                                                @php
+                                                    $getClassTimeTable = App\Models\ClassTimeTableModel::getRecordWeekName($value->class_id, $value->subject_id, date('1'));
+                                                @endphp
+                                                @if(!empty($getClassTimeTable))
+                                                    {{ date('h:i A', strtotime($getClassTimeTable->start_time)) }}
+                                                    to
+                                                    {{ date('h:i A', strtotime($getClassTimeTable->end_time)) }} 
+                                                    </br>
+                                                    Room Number: {{ $getClassTimeTable->room_number }}
+
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ url('teacher/my-class-subject/timetable/'.$value->class_id.'/'.$value->subject_id) }}" class="btn btn-primary">Class Timetable</a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="100%">Record not found.</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
 
@@ -101,7 +113,7 @@
                 </div>   
                             
                 <div class="pull-right">
-                    {{-- {{ $getSchool->links() }} --}}
+                    {{-- {{ $getRecord->links() }} --}}
                 </div> 
 
             </div>
